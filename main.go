@@ -1,11 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/joho/godotenv"
 	// "github.com/labstack/echo/v4"
-	"github.com/pranotobudi/go-simple-ecommerce/database"
+	"github.com/pranotobudi/go-simple-ecommerce/internal/repository"
 )
 
 func main() {
@@ -14,7 +15,13 @@ func main() {
 		log.Println("failed to load .env file")
 	}
 
-	database.GetDBInstance()
+	// db := database.GetDBInstance()
+	pr := repository.NewProductRepository()
+
+	pr.FreshProductMigrator()
+	pr.ProductDataSeed()
+	products, _ := pr.GetProducts()
+	fmt.Println(products)
 	// e := echo.New()
 	// e.GET("/", hello)
 	// e.Logger.Fatal(e.Start(":8080"))
