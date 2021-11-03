@@ -7,6 +7,7 @@ require (
 	github.com/jcmturner/gokrb5/v8 v8.2.0 // indirect
 	github.com/joho/godotenv v1.4.0 // indirect
 	github.com/labstack/echo/v4 v4.6.1 // indirect
+	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519 // indirect
 	gopkg.in/jcmturner/aescts.v1 v1.0.1 // indirect
 	gopkg.in/jcmturner/dnsutils.v1 v1.0.1 // indirect
 	gopkg.in/jcmturner/goidentity.v3 v3.0.0 // indirect

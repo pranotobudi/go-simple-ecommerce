@@ -8,6 +8,7 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	"github.com/pranotobudi/go-simple-ecommerce/api/products"
+	"github.com/pranotobudi/go-simple-ecommerce/api/users"
 )
 
 func main() {
@@ -16,6 +17,7 @@ func main() {
 		log.Println("failed to load .env file")
 	}
 
+	// Product
 	// db := database.GetDBInstance()
 	pr := products.NewProductRepository()
 	pr.FreshProductMigrator()
@@ -23,10 +25,19 @@ func main() {
 	productsList, _ := pr.GetProducts()
 	fmt.Println(productsList)
 
-	handler := products.NewProductHandler()
+	//User
+	ur := users.NewUserRepository()
+	ur.FreshUserMigrator()
+	ur.UserDataSeed()
+	user, _ := ur.GetUserByEmail("emailusername1@gmail.com")
+	fmt.Println(user)
+
+	productHandler := products.NewProductHandler()
+	userHandler := users.NewUserHandler()
 	e := echo.New()
 	e.GET("/", hello)
-	e.GET("/api/v1/products", handler.GetProducts)
+	e.GET("/api/v1/products", productHandler.GetProducts)
+	e.POST("/api/v1/register", userHandler.RegisterUser)
 	e.Static("/static", "assets")
 
 	e.Logger.Fatal(e.Start(":8080"))
