@@ -38,6 +38,7 @@ func main() {
 	e.GET("/", hello)
 	e.GET("/api/v1/products", productHandler.GetProducts)
 	e.POST("/api/v1/register", userHandler.RegisterUser)
+	e.POST("/api/v1/login", userHandler.UserLogin)
 	e.Static("/static", "assets")
 
 	e.Logger.Fatal(e.Start(":8080"))
