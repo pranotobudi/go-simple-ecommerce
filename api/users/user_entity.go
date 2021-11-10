@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/pranotobudi/go-simple-ecommerce/api/common"
+	"github.com/pranotobudi/go-simple-ecommerce/common"
 	"github.com/pranotobudi/go-simple-ecommerce/database"
 	"gorm.io/gorm"
 )
@@ -22,6 +22,7 @@ type UserRepository interface {
 	AddUser(entity User) (*User, error)
 	GetUserById(id uint) (*User, error)
 	GetUserByEmail(email string) (*User, error)
+	GetUserByUsername(username string) (*User, error)
 }
 
 type userRepository struct {
@@ -36,7 +37,7 @@ func NewUserRepository() *userRepository {
 func (r *userRepository) FreshUserMigrator() {
 	r.db.AutoMigrate(User{})
 
-	// Create Fresh Recipe Table
+	// Create Fresh User Table
 	if (r.db.Migrator().HasTable(&User{})) {
 		fmt.Println("User table exist")
 		r.db.Migrator().DropTable(&User{})
@@ -78,6 +79,15 @@ func (r *userRepository) GetUserById(id uint) (*User, error) {
 func (r *userRepository) GetUserByEmail(email string) (*User, error) {
 	var entity User
 	err := r.db.First(&entity, "email=?", email).Error
+	if err != nil {
+		return nil, err
+	}
+	return &entity, nil
+}
+
+func (r *userRepository) GetUserByUsername(username string) (*User, error) {
+	var entity User
+	err := r.db.First(&entity, "username=?", username).Error
 	if err != nil {
 		return nil, err
 	}

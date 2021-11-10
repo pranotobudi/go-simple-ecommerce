@@ -38,7 +38,7 @@ func NewProductRepository() *productRepository {
 func (r *productRepository) FreshProductMigrator() {
 	r.db.AutoMigrate(Product{})
 
-	// Create Fresh Recipe Table
+	// Create Fresh Product Table
 	if (r.db.Migrator().HasTable(&Product{})) {
 		fmt.Println("Product table exist")
 		r.db.Migrator().DropTable(&Product{})
