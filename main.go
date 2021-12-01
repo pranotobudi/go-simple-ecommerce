@@ -45,7 +45,7 @@ func main() {
 	e.POST("/api/v1/login", userHandler.UserLogin)
 	e.Static("/static", "assets")
 
-	e.Logger.Fatal(e.Start(":8080"))
+	e.Logger.Fatal(e.Start(":" + os.Getenv("PORT")))
 }
 
 func hello(c echo.Context) error {
