@@ -14,7 +14,10 @@ import (
 
 func main() {
 	if os.Getenv("APP_ENV") != "production" {
-		// executed in development only
+		// executed in development only,
+		//for production set those on production environment settings
+
+		// load local env variables to os
 		err := godotenv.Load(".env")
 		if err != nil {
 			log.Println("failed to load .env file")

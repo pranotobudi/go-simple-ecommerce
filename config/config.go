@@ -23,3 +23,19 @@ func DbConfig() DbConnection {
 
 	return dbConfig
 }
+
+type AppEnvironment struct {
+	Port    string
+	AppEnv  string
+	AppHost string
+}
+
+func AppConfig() AppEnvironment {
+	appConfig := AppEnvironment{
+		AppHost: os.Getenv("APP_HOST"),
+		Port:    os.Getenv("PORT"),
+		AppEnv:  os.Getenv("APP_ENV"),
+	}
+
+	return appConfig
+}
