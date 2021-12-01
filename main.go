@@ -14,6 +14,7 @@ import (
 
 func main() {
 	if os.Getenv("APP_ENV") != "production" {
+		// executed in development only
 		err := godotenv.Load(".env")
 		if err != nil {
 			log.Println("failed to load .env file")
