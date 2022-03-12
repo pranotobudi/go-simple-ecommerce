@@ -43,6 +43,7 @@ func main() {
 	userHandler := users.NewUserHandler()
 	e := echo.New()
 	e.GET("/", hello)
+	e.POST("/api/v1/search", productHandler.SearchProducts)
 	e.GET("/api/v1/products", productHandler.GetProducts)
 	e.POST("/api/v1/register", userHandler.RegisterUser)
 	e.POST("/api/v1/login", userHandler.UserLogin)

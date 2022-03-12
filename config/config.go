@@ -11,6 +11,10 @@ type DbConnection struct {
 	SSLMode  string
 }
 
+type ESDbConnection struct {
+	IndexName string
+}
+
 func DbConfig() DbConnection {
 	dbConfig := DbConnection{
 		Host:     os.Getenv("DB_HOST"),
@@ -22,6 +26,13 @@ func DbConfig() DbConnection {
 	}
 
 	return dbConfig
+}
+func ESDbConfig() ESDbConnection {
+	esDbConfig := ESDbConnection{
+		IndexName: os.Getenv("ES_INDEX_NAME"),
+	}
+
+	return esDbConfig
 }
 
 type AppEnvironment struct {

@@ -80,7 +80,7 @@ func (h *userHandler) RegisterUser(c echo.Context) error {
 	user.Password = common.GeneratePassword(userReg.Password)
 	savedUser, err := h.repository.AddUser(user)
 	if err != nil {
-		api.ResponseErrorFormatter(c, err)
+		return api.ResponseErrorFormatter(c, err)
 	}
 
 	// Success ProductResponse
